@@ -1,0 +1,92 @@
+@media (max-width: 1399px) {
+    .todoBox {
+        display: flex;
+        flex-direction: column;
+        width: 90%;
+        min-height: 500px;
+        background-color: aqua;
+        margin: 0 auto;
+    }
+
+    .todoBox header {
+        display: flex;
+        justify-content: center;
+        font-size: 24px;
+        height: 80px;
+        cursor: default;
+    }
+
+    .central {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        margin: 0 auto;
+        max-width: 750px;
+        height: auto;
+    }
+
+    .btnMenu ul li {
+        font-size: 16px;
+        height: 25px;
+        width: 80%;
+        text-align: center;
+        cursor: pointer;
+        font-weight: 600;
+    }
+    
+    .btnMenu ul li.active {
+        background-color: #FFBD33;
+        text-decoration: underline #fff;
+    }
+
+    .box {
+        background-color: #498E0F;
+        min-height: 300px;
+        width: auto;
+        display: flex;
+        flex-direction: row;
+    }
+    
+    .activeList ul li {
+        list-style: none;
+        width: auto;
+        height: 30px;
+        font-size: 18px;
+        padding: 3px 10px;
+        margin: 5px 10px;
+        background-color: rgba(248, 245, 229, .3);
+        cursor: pointer;
+    }
+
+    .doneList {
+        width: 750px;
+        display: none;
+    }
+    
+    .doneList ul li {
+        list-style: none;
+        text-decoration: line-through;
+        font-size: 25px;
+        margin: 5px 15px;
+    }
+    
+    .doesentList {
+        width: 750px;
+        display: none;
+    } 
+    
+    .doesentList ul li {
+        list-style: none;
+        color: red;
+        font-size: 25px;
+        margin: 5px 15px;
+    }
+    
+    .shown {
+        display: block;
+        position: relative;
+        width: 750px;
+        height: auto;
+    }
+
+}
