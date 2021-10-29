@@ -2,7 +2,8 @@ let btns = document.querySelectorAll('.btn'),
     lists = document.querySelectorAll('.box > div'),
     items = document.querySelectorAll('.box > div > ul'),
     submit = document.querySelector('.add > button'),
-    input = document.querySelector('.add > input');
+    input = document.querySelector('.add > input'),
+    task = document.querySelectorAll('.activeList > ul > li');
 
 
 // btns[0].onclick = function() {
@@ -20,8 +21,10 @@ let btns = document.querySelectorAll('.btn'),
 //     });
 // })
 
+// toggle classes for buttons and lists
+
 btns[0].onclick = function() {
-    btns[0].classList.toggle('active');
+    btns[0].classList.add('active');
     if (active = true) {
         btns[1].classList.remove('active');
         btns[2].classList.remove('active');
@@ -34,7 +37,7 @@ btns[0].onclick = function() {
 };
 
 btns[1].onclick = function() {
-    btns[1].classList.toggle('active');
+    btns[1].classList.add('active');
     if (active = true) {
         btns[0].classList.remove('active');
         btns[2].classList.remove('active');
@@ -47,7 +50,7 @@ btns[1].onclick = function() {
 };
 
 btns[2].onclick = function() {
-    btns[2].classList.toggle('active');
+    btns[2].classList.add('active');
     if (active = true) {
         btns[0].classList.remove('active');
         btns[1].classList.remove('active');
@@ -58,3 +61,18 @@ btns[2].onclick = function() {
         lists[2].classList.remove('shown');
     };
 };
+
+
+
+// add new tasks adn chacking
+let activeList = document.querySelector('.activeList > ul');
+submit.addEventListener('click', function() {
+    let li = document.createElement('li');
+    li.innerHTML = input.value;
+
+    activeList.appendChild(li);
+
+    input.value = '';
+});
+
+

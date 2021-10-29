@@ -88,7 +88,7 @@ body {
 .activeList ul li {
     list-style: none;
     width: auto;
-    height: 35px;
+    min-height: 35px;
     font-size: 25px;
     padding: 3px 10px;
     margin: 5px 10px;
