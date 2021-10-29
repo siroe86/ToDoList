@@ -75,14 +75,21 @@ body {
     background-color: #498E0F;
     min-height: 300px;
     width: auto;
-    display: flex;
-    flex-direction: row;
+    display: block;
+    position: relative;
 }
 
 .activeList {
+    height: auto;
     width: 750px;
-    visibility: hidden;
-    position: absolute;
+    display: none;
+    position: relative;
+}
+
+.activeList ul {
+    width: auto;
+    height: auto;
+    position: relative;
 }
 
 .activeList ul li {
@@ -98,13 +105,13 @@ body {
 
 .doneList {
     width: 750px;
-    visibility: hidden;
-    position: absolute;
+    display: none;
+    position: relative;
 }
 
 .doneList ul li {
     width: auto;
-    height: 35px;
+    min-height: 35px;
     list-style: none;
     text-decoration: line-through;
     font-size: 25px;
@@ -114,26 +121,24 @@ body {
 
 .doesentList {
     width: 750px;
-    min-height: 300px;
-    visibility: hidden;
-    position: absolute;
-    background-color: #E6CF85;
+    display: none;
+    position: relative;
 } 
 
 .doesentList ul li {
     width: auto;
-    height: 35px;
+    min-height: 35px;
     list-style: none;
     color: #BF0202;
     font-weight: 600;
     font-size: 25px;
     padding: 3px 10px;
     margin: 5px 10px;
-    background-color: rgba(147, 114, 114, .3);
+    background-color: rgba(113, 114, 114, .3);
 }
 
 .shown {
-    visibility: visible;
+    display: block;
 }
 
 /* settings of input */
