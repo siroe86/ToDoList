@@ -101,6 +101,21 @@ body {
     margin: 5px 10px;
     background-color: rgba(248, 245, 229, .3);
     cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.activeList ul li span {
+    font-size: 23px;
+    cursor: pointer;
+    color: orangered;
+    text-align: right;
+    transition: .2s;
+}
+.activeList ul li span:hover {
+    font-size: 25px;
+    background-color: rgba(208, 241, 173, .1);
 }
 
 .doneList {
@@ -172,6 +187,7 @@ body {
     background-color: rosybrown;
     border: none;
     font-size: 20px;
+    cursor: pointer;
 }
 
 

@@ -64,15 +64,31 @@ btns[2].onclick = function() {
 
 
 
-// add new tasks adn chacking
+// add new tasks and checking
 let activeList = document.querySelector('.activeList > ul');
+
 submit.addEventListener('click', function() {
     let li = document.createElement('li');
     li.innerHTML = input.value;
+    
 
-    activeList.appendChild(li);
+    if (input.value == "") {
+        alert('Please, add some text.');
+    } else {
+        activeList.appendChild(li);
+    };
 
     input.value = '';
+
+    let span = document.createElement('SPAN');
+    let txt = document.createTextNode("Can`t");
+    span.appendChild(txt);
+    li.appendChild(span);
 });
 
+
+
+//  transform to complited tasks 
+
+let doneList = document.querySelector('.doneList > ul');
 
