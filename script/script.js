@@ -3,7 +3,9 @@ let btns = document.querySelectorAll('.btn'),
     items = document.querySelectorAll('.box > div > ul'),
     submit = document.querySelector('.add > button'),
     input = document.querySelector('.add > input'),
-    task = document.querySelectorAll('.activeList > ul > li');
+    task = document.querySelectorAll('.activeList > ul > li'),
+    doneList = document.querySelector('.doneList > ul'),
+    doesntList = document.querySelector('.doesntList > ul');
 
 
 // btns[0].onclick = function() {
@@ -67,8 +69,10 @@ btns[2].onclick = function() {
 // add new tasks and checking
 let activeList = document.querySelector('.activeList > ul');
 
-submit.addEventListener('click', function() {
+
+submit.addEventListener('click', function(event) {
     let li = document.createElement('li');
+
     li.innerHTML = input.value;
     
 
@@ -84,11 +88,34 @@ submit.addEventListener('click', function() {
     let txt = document.createTextNode("Can`t");
     span.appendChild(txt);
     li.appendChild(span);
+
+    //  transform to complited tasks 
+    li.addEventListener('click', function(event) {
+        li.classList.add('checked');
+
+        setTimeout(checked, 10000);
+
+        function checked() {
+            li.classList.remove('checked');
+            li.remove();
+            doneList.appendChild(li);
+            span.remove();
+        };
+    });
+
+    // transfom to canceled list
+    span.addEventListener('click', function(event) {
+        span.remove();
+        li.remove();
+        doesntList.appendChild(li);
+        
+        event.stopImmediatePropagation();
+    });
 });
 
+// let local = function storage() {
+//     localStorage.setItem('input', input.value);
+// };
 
 
-//  transform to complited tasks 
-
-let doneList = document.querySelector('.doneList > ul');
 
