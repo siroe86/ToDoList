@@ -119,10 +119,6 @@ body {
     font-size: 25px;
     background-color: rgba(208, 241, 173, .1);
 }
-.checked {
-    transition: 10s;
-    opacity: 0;
-}
 
 .doneList {
     width: 750px;
