@@ -6,11 +6,12 @@ let btns = document.querySelectorAll('.btn'),
     task = document.querySelectorAll('.activeList > ul > li'),
     activeList = document.querySelector('.activeList > ul'),
     doneList = document.querySelector('.doneList > ul'),
-    doesntList = document.querySelector('.doesntList > ul');
-    
+    doesntList = document.querySelector('.doesntList > ul'),
+    clear = document.querySelector('.clear > button');
 
- let spisokOne, spisokTwo, spisokThree;
- function toLocal() {
+let spisokOne, spisokTwo, spisokThree;
+
+function toLocal() {
     spisokOne = activeList.innerHTML;
     spisokTwo = doneList.innerHTML;
     spisokThree = doesntList.innerHTML;
@@ -20,7 +21,7 @@ let btns = document.querySelectorAll('.btn'),
     localStorage.setItem('doesntList', JSON.stringify(spisokThree));
 };
 
- if (localStorage.getItem('activeList') && localStorage.getItem('doneList') && localStorage.getItem('doesntList')) {
+if (localStorage.getItem('activeList') && localStorage.getItem('doneList') && localStorage.getItem('doesntList')) {
     let backOne, backTwo, backThree;
     backOne = localStorage.getItem('activeList');
     backTwo = localStorage.getItem('doneList');
@@ -29,6 +30,34 @@ let btns = document.querySelectorAll('.btn'),
     activeList.innerHTML = JSON.parse(backOne);
     doneList.innerHTML = JSON.parse(backTwo);
     doesntList.innerHTML = JSON.parse(backThree);
+
+
+   let hyisok = document.querySelectorAll('.activeList > ul > Li');
+
+    hyisok.forEach(function (li) {
+
+        li.addEventListener('click', function (event) {
+
+            li.classList.remove('checked');
+            li.remove();
+            doneList.appendChild(li);
+            spannnn.remove();
+            toLocal();
+        });
+
+        let spannnn = li.querySelector('span');
+        // transfom to canceled list
+        spannnn.addEventListener('click', function (event) {
+
+
+            spannnn.remove();
+            hyisok.remove();
+            doesntList.appendChild(hyisok);
+
+            event.stopImmediatePropagation();
+            toLocal();
+        });
+    });
 };
 
 
@@ -43,13 +72,13 @@ let btns = document.querySelectorAll('.btn'),
 // btns.forEach(function(item) {
 //     item.addEventListener('click', function() {
 //         item.classList.toggle('active');
-        
+
 //     });
 // })
 
 // toggle classes for buttons and lists
 
-btns[0].onclick = function() {
+btns[0].onclick = function () {
     btns[0].classList.add('active');
     if (active = true) {
         btns[1].classList.remove('active');
@@ -62,7 +91,7 @@ btns[0].onclick = function() {
     };
 };
 
-btns[1].onclick = function() {
+btns[1].onclick = function () {
     btns[1].classList.add('active');
     if (active = true) {
         btns[0].classList.remove('active');
@@ -75,7 +104,7 @@ btns[1].onclick = function() {
     };
 };
 
-btns[2].onclick = function() {
+btns[2].onclick = function () {
     btns[2].classList.add('active');
     if (active = true) {
         btns[0].classList.remove('active');
@@ -94,7 +123,8 @@ btns[2].onclick = function() {
 
 
 
-submit.addEventListener('click', function(event) {
+submit.addEventListener('click', function (event) {
+    // add new task`s
     let li = document.createElement('li');
 
     li.innerHTML = input.value;
@@ -103,7 +133,7 @@ submit.addEventListener('click', function(event) {
         alert('Please, add some text.');
     } else {
         activeList.appendChild(li);
-        toLocal();
+        toLocal()
     };
 
     input.value = '';
@@ -113,29 +143,28 @@ submit.addEventListener('click', function(event) {
     span.appendChild(txt);
     li.appendChild(span);
 
-    //  transform to complited tasks 
-    li.addEventListener('click', function(event) {
+    //  transform to complited list
+    li.addEventListener('click', function (event) {
 
         li.classList.remove('checked');
         li.remove();
         doneList.appendChild(li);
         span.remove();
-        toLocal();
+        toLocal()
     });
 
     // transfom to canceled list
-    span.addEventListener('click', function(event) {
+    span.addEventListener('click', function (event) {
         span.remove();
         li.remove();
         doesntList.appendChild(li);
-        
-        event.stopImmediatePropagation();
-        toLocal();
-    });
 
+        event.stopImmediatePropagation();
+        toLocal()
+    });
 });
 
-
-
-
-
+clear.onclick = function () {
+    localStorage.clear();
+    alert('Need to refresh page');
+};

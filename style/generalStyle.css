@@ -193,6 +193,14 @@ body {
     cursor: pointer;
 }
 
+.clear button {
+    color: hotpink;
+    font-size: 20px;
+    background-color: rgb(240, 239, 239);
+    border: none;
+    cursor: pointer;
+}
+
 
 
 
