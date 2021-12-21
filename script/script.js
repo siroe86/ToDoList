@@ -1,170 +1,151 @@
-let btns = document.querySelectorAll('.btn'),
-    lists = document.querySelectorAll('.box > div'),
-    items = document.querySelector('.box > div > ul'),
-    submit = document.querySelector('.add > button'),
-    input = document.querySelector('.add > input'),
-    task = document.querySelectorAll('.activeList > ul > li'),
-    activeList = document.querySelector('.activeList > ul'),
-    doneList = document.querySelector('.doneList > ul'),
-    doesntList = document.querySelector('.doesntList > ul'),
-    clear = document.querySelector('.clear > button');
+document.addEventListener('DOMContentLoaded', function () {
 
-let spisokOne, spisokTwo, spisokThree;
+    let btns = document.querySelectorAll('.btn'),
+        lists = document.querySelectorAll('.box > div'),
+        input = document.querySelector('.add > input'),
+        activeList = document.querySelector('.activeList > ul'),
+        doneList = document.querySelector('.doneList > ul'),
+        doesntList = document.querySelector('.doesntList > ul');
+        
+    // btns[0].onclick = function() {
+    //     console.log("click!");
+    // };
 
-function toLocal() {
-    spisokOne = activeList.innerHTML;
-    spisokTwo = doneList.innerHTML;
-    spisokThree = doesntList.innerHTML;
+    // btns[0].addEventListener('click', function() {
+    //     console.log('nice, thats click!');
+    // });
 
-    localStorage.setItem('activeList', JSON.stringify(spisokOne));
-    localStorage.setItem('doneList', JSON.stringify(spisokTwo));
-    localStorage.setItem('doesntList', JSON.stringify(spisokThree));
-};
+    // btns.forEach(function(item) {
+    //     item.addEventListener('click', function() {
+    //         item.classList.toggle('active');
 
-if (localStorage.getItem('activeList') && localStorage.getItem('doneList') && localStorage.getItem('doesntList')) {
-    let backOne, backTwo, backThree;
-    backOne = localStorage.getItem('activeList');
-    backTwo = localStorage.getItem('doneList');
-    backThree = localStorage.getItem('doesntList');
+    //     });
+    // })
 
-    activeList.innerHTML = JSON.parse(backOne);
-    doneList.innerHTML = JSON.parse(backTwo);
-    doesntList.innerHTML = JSON.parse(backThree);
+    // toggle classes for buttons and lists
 
+    btns[0].onclick = function () {
+        btns[0].classList.add('active');
+        if (active = true) {
+            btns[1].classList.remove('active');
+            btns[2].classList.remove('active');
+            lists[0].classList.add('shown');
+            lists[1].classList.remove('shown');
+            lists[2].classList.remove('shown');
+        } else {
+            lists[0].classList.remove('shown');
+        };
+    };
 
-   let hyisok = document.querySelectorAll('.activeList > ul > Li');
+    btns[1].onclick = function () {
+        btns[1].classList.add('active');
+        if (active = true) {
+            btns[0].classList.remove('active');
+            btns[2].classList.remove('active');
+            lists[1].classList.add('shown');
+            lists[0].classList.remove('shown');
+            lists[2].classList.remove('shown');
+        } else {
+            lists[1].classList.remove('shown');
+        };
+    };
 
-    hyisok.forEach(function (li) {
+    btns[2].onclick = function () {
+        btns[2].classList.add('active');
+        if (active = true) {
+            btns[0].classList.remove('active');
+            btns[1].classList.remove('active');
+            lists[2].classList.add('shown');
+            lists[0].classList.remove('shown');
+            lists[1].classList.remove('shown');
+        } else {
+            lists[2].classList.remove('shown');
+        };
+    };
 
+    // add new tasks and checking
+
+    function eventHandler(li) {
         li.addEventListener('click', function (event) {
-
-            li.classList.remove('checked');
-            li.remove();
-            doneList.appendChild(li);
-            spannnn.remove();
-            toLocal();
+            let span = li.querySelector('span');
+            if (event.target.className === 'li') { // change to complited
+                li.classList.remove('checked');
+                li.remove();
+                span.remove();
+                doneList.appendChild(li);
+                toLocal();
+            } else if (event.target.className === 'span') { //change to doesentList
+                span.remove();
+                li.remove();
+                doesntList.appendChild(li);
+                event.stopImmediatePropagation();
+                toLocal();
+            }
         });
+    }
+    let submit = document.querySelector('.add > button');
+    submit.addEventListener('click', function (event) {
+        // add new task`s
+        let li = document.createElement('li');
 
-        let spannnn = li.querySelector('span');
-        // transfom to canceled list
-        spannnn.addEventListener('click', function (event) {
+        li.innerHTML = input.value;
 
+        if (input.value == "") {
+            alert('Please, add some text.');
+        } else {
+            activeList.appendChild(li);
+        }
 
-            spannnn.remove();
-            hyisok.remove();
-            doesntList.appendChild(hyisok);
+        input.value = '';
 
-            event.stopImmediatePropagation();
-            toLocal();
+        // add can`t button
+
+        let span = document.createElement('span');
+        let txt = document.createTextNode("Can`t");
+        span.appendChild(txt);
+        span.classList.add('span');
+        li.appendChild(span);
+        li.classList.add('li');
+        
+        toLocal();
+        
+        eventHandler(li);
+    });
+
+    // save to local storage
+  
+    let act,
+        don,
+        doe;
+
+    function toLocal() {
+        act = activeList.innerHTML;
+        don = doneList.innerHTML;
+        doe = doesntList.innerHTML;
+        localStorage.setItem('activeList', JSON.stringify(act));
+        localStorage.setItem('doneList', JSON.stringify(don));
+        localStorage.setItem('doesentList', JSON.stringify(doe));
+    }
+
+    if (localStorage.getItem('activeList')) {
+        let actback = localStorage.getItem('activeList');
+        activeList.innerHTML = JSON.parse(actback);
+        activeList.querySelectorAll('li').forEach(function(li) {
+            eventHandler(li);
         });
-    });
-};
+    } else if (localStorage.getItem('doneList')) {
+        let donback = localStorage.getItem('doneList');
+        doneList.innerHTML = JSON.parse(donback);
+    } else if (localStorage.getItem('doesentList')) {
+        let doeback = localStorage.getItem('doesentList');
+        doesentList.innerHTML = JSON.parse(doeback);
+    }
 
-
-// btns[0].onclick = function() {
-//     console.log("click!");
-// };
-
-// btns[0].addEventListener('click', function() {
-//     console.log('nice, thats click!');
-// });
-
-// btns.forEach(function(item) {
-//     item.addEventListener('click', function() {
-//         item.classList.toggle('active');
-
-//     });
-// })
-
-// toggle classes for buttons and lists
-
-btns[0].onclick = function () {
-    btns[0].classList.add('active');
-    if (active = true) {
-        btns[1].classList.remove('active');
-        btns[2].classList.remove('active');
-        lists[0].classList.add('shown');
-        lists[1].classList.remove('shown');
-        lists[2].classList.remove('shown');
-    } else {
-        lists[0].classList.remove('shown');
-    };
-};
-
-btns[1].onclick = function () {
-    btns[1].classList.add('active');
-    if (active = true) {
-        btns[0].classList.remove('active');
-        btns[2].classList.remove('active');
-        lists[1].classList.add('shown');
-        lists[0].classList.remove('shown');
-        lists[2].classList.remove('shown');
-    } else {
-        lists[1].classList.remove('shown');
-    };
-};
-
-btns[2].onclick = function () {
-    btns[2].classList.add('active');
-    if (active = true) {
-        btns[0].classList.remove('active');
-        btns[1].classList.remove('active');
-        lists[2].classList.add('shown');
-        lists[0].classList.remove('shown');
-        lists[1].classList.remove('shown');
-    } else {
-        lists[2].classList.remove('shown');
-    };
-};
-
-
-
-// add new tasks and checking
-
-
-
-submit.addEventListener('click', function (event) {
-    // add new task`s
-    let li = document.createElement('li');
-
-    li.innerHTML = input.value;
-
-    if (input.value == "") {
-        alert('Please, add some text.');
-    } else {
-        activeList.appendChild(li);
-        toLocal()
+    // clear button
+    let clear = document.querySelector('.clear > button');
+    clear.onclick = function () {
+        localStorage.clear();
+        alert('Need to refresh page');
     };
 
-    input.value = '';
-
-    let span = document.createElement('SPAN');
-    let txt = document.createTextNode("Can`t");
-    span.appendChild(txt);
-    li.appendChild(span);
-
-    //  transform to complited list
-    li.addEventListener('click', function (event) {
-
-        li.classList.remove('checked');
-        li.remove();
-        doneList.appendChild(li);
-        span.remove();
-        toLocal()
-    });
-
-    // transfom to canceled list
-    span.addEventListener('click', function (event) {
-        span.remove();
-        li.remove();
-        doesntList.appendChild(li);
-
-        event.stopImmediatePropagation();
-        toLocal()
-    });
 });
-
-clear.onclick = function () {
-    localStorage.clear();
-    alert('Need to refresh page');
-};
