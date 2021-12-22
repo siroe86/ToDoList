@@ -24,6 +24,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // toggle classes for buttons and lists
 
+    // btns.forEach(function(event) {
+
+    // });
+
     btns[0].onclick = function () {
         btns[0].classList.add('active');
         if (active = true) {
@@ -65,7 +69,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // add new tasks and checking
 
-    function eventHandler(li) {
+    function addEventHandler(li) {
         li.addEventListener('click', function (event) {
             let span = li.querySelector('span');
             if (event.target.className === 'li') { // change to complited
@@ -109,7 +113,7 @@ document.addEventListener('DOMContentLoaded', function () {
         
         toLocal();
         
-        eventHandler(li);
+        addEventHandler(li);
     });
 
     // save to local storage
@@ -122,7 +126,7 @@ document.addEventListener('DOMContentLoaded', function () {
         act = activeList.innerHTML;
         don = doneList.innerHTML;
         doe = doesntList.innerHTML;
-        localStorage.setItem('activeList', JSON.stringify(act));
+        localStorage.setItem('activeList', JSON.stringify(act)); // save value to localstorage
         localStorage.setItem('doneList', JSON.stringify(don));
         localStorage.setItem('doesentList', JSON.stringify(doe));
     }
@@ -131,14 +135,16 @@ document.addEventListener('DOMContentLoaded', function () {
         let actback = localStorage.getItem('activeList');
         activeList.innerHTML = JSON.parse(actback);
         activeList.querySelectorAll('li').forEach(function(li) {
-            eventHandler(li);
+            addEventHandler(li);
         });
-    } else if (localStorage.getItem('doneList')) {
+    } 
+    if (localStorage.getItem('doneList')) {
         let donback = localStorage.getItem('doneList');
         doneList.innerHTML = JSON.parse(donback);
-    } else if (localStorage.getItem('doesentList')) {
+    } 
+    if (localStorage.getItem('doesentList')) {
         let doeback = localStorage.getItem('doesentList');
-        doesentList.innerHTML = JSON.parse(doeback);
+        doesntList.innerHTML = JSON.parse(doeback);
     }
 
     // clear button
