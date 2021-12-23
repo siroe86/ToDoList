@@ -154,4 +154,15 @@ document.addEventListener('DOMContentLoaded', function () {
         alert('Need to refresh page');
     };
 
+    let switchBtn = document.querySelector('#darkBtn');
+
+    switchBtn.onclick = function() {
+        let theme = document.querySelector('#switch');
+
+        if (theme.getAttribute('href') == 'style/generalStyle.css') {
+            theme.href = 'style/generalDark.css';
+        } else {
+            theme.href = 'style/generalStyle.css';
+        }
+    }
 });
